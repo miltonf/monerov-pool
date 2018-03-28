@@ -1,0 +1,13 @@
+[Unit]
+Description=MoneroV Daemon
+After=network.target
+
+[Service]
+Type=forking
+GuessMainPID=no
+ExecStart=/usr/local/src/monerov/build/release/bin/monerov --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc
+Restart=always
+User=monerovdaemon
+
+[Install]
+WantedBy=multi-user.target
