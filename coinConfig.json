@@ -24,5 +24,13 @@
     "name": "Aeon Coin",
     "mixIn": 4,
     "shortCode": "AEON"
+  },
+  "monerov": {
+    "funcFile": "./lib/coins/monerov.js",
+    "paymentFile": "./payment_systems/monerov.js",
+    "sigDigits": 100000000000,
+    "name": "MoneroV",
+    "mixIn": 4,
+    "shortCode": "XMV"
   }
 }
