@@ -29,7 +29,7 @@ cd monerov
 sudo git checkout split
 #curl https://raw.githubusercontent.com/Snipa22/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v
 sudo make -j$(nproc)
-sudo cp ~/nodejs-pool/deployment/monerov.service /lib/systemd/system/
+sudo cp ~/monerov-pool/deployment/monerov.service /lib/systemd/system/
 sudo useradd -m monerovdaemon -d /home/monerovdaemon
 BLOCKCHAIN_DOWNLOAD_DIR=$(sudo -u monerovdaemon mktemp -d)
 sudo -u monerovdaemon wget --limit-rate=50m -O $BLOCKCHAIN_DOWNLOAD_DIR/blockchain.raw https://downloads.getmonero.org/blockchain.raw
@@ -41,7 +41,7 @@ sudo systemctl start monerov
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 source ~/.nvm/nvm.sh
 nvm install v8.9.3
-cd ~/nodejs-pool
+cd ~/monerov-pool
 npm install
 npm install -g pm2
 openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.pool" -newkey rsa:2048 -nodes -keyout cert.key -x509 -out cert.pem -days 36500
@@ -69,7 +69,7 @@ sudo chown -R root:www-data /etc/caddy
 sudo mkdir /etc/ssl/caddy
 sudo chown -R www-data:root /etc/ssl/caddy
 sudo chmod 0770 /etc/ssl/caddy
-sudo cp ~/nodejs-pool/deployment/caddyfile /etc/caddy/Caddyfile
+sudo cp ~/monerov-pool/deployment/caddyfile /etc/caddy/Caddyfile
 sudo chown www-data:www-data /etc/caddy/Caddyfile
 sudo chmod 444 /etc/caddy/Caddyfile
 sudo sh -c "sed 's/ProtectHome=true/ProtectHome=false/' init/linux-systemd/caddy.service > /etc/systemd/system/caddy.service"
@@ -81,7 +81,7 @@ sudo systemctl start caddy.service
 rm -rf $CADDY_DOWNLOAD_DIR
 cd ~
 sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v8.9.3/bin `pwd`/.nvm/versions/node/v8.9.3/lib/node_modules/pm2/bin/pm2 startup systemd -u $CURUSER --hp `pwd`
-cd ~/nodejs-pool
+cd ~/monerov-pool
 sudo chown -R $CURUSER. ~/.pm2
 echo "Installing pm2-logrotate in the background!"
 pm2 install pm2-logrotate &
