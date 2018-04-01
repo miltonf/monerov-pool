@@ -26,8 +26,8 @@
     "shortCode": "AEON"
   },
   "xmv": {
-    "funcFile": "./lib/coins/monerov.js",
-    "paymentFile": "./payment_systems/monerov.js",
+    "funcFile": "./lib/coins/xmv.js",
+    "paymentFile": "./payment_systems/xmv.js",
     "sigDigits": 100000000000,
     "name": "MoneroV",
     "mixIn": 4,
